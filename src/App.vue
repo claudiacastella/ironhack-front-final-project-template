@@ -1,5 +1,6 @@
 <template>
   <section>
+    <h1>Hello world</h1>
     <router-view class="app-main" />
   </section>
 </template>
