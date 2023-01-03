@@ -1,7 +1,8 @@
 <template>
   <section>
-    <h1>Hello world</h1>
+    <Navbar />
     <router-view class="app-main" />
+    <Footer></Footer>
   </section>
 </template>
 
@@ -10,6 +11,8 @@ import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
 import { useUserStore } from "./store/user.js";
+import Navbar from "./components/NavBar.vue";
+import Footer from "./components/Footer.vue";
 
 const router = useRouter();
 const userStore = useUserStore();
