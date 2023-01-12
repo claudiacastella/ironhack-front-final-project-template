@@ -1,5 +1,5 @@
 <template>
-    <header class="bg-yellow-200 text-slate-800 ">
+    <header class="bg-emerald-300 text-slate-800 ">
         <nav class="container py-5 px-4 flex flex-col gap-4 items-center sm:flex-row">
             <div id="logo" class="flex items-center gap-x-4">
                 <img src="" alt="">

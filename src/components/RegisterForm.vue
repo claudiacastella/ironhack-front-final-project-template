@@ -1,8 +1,8 @@
 <template>
-  <form class="bg-white p-8 max-w-md mx-auto rounded-lg shadow-lg m-8">
-    <h1 class="text-3xl font-bold mb-4">Register</h1>
+  <form @submit.prevent="register" class="bg-slate-200 p-8 max-w-md mx-auto rounded-lg shadow-lg m-8">
+    <h1 class="text-3xl font-bold mb-8">Register</h1>
     <div class="mb-4">
-      <label for="email" class="block font-bold mb-2 text-gray-700"
+      <label for="email" class="text-xl block font-bold mb-2 text-gray-700"
         >Email</label
       >
       <input
@@ -14,7 +14,7 @@
       <div class="errorMsg" v-if="errMsg">{{ errMsg }}</div>
     </div>
     <div class="mb-4">
-      <label for="password" class="block font-bold mb-2 text-gray-700"
+      <label for="password" class="text-xl block font-bold mb-2 text-gray-700"
         >Password</label
       >
       <input
@@ -25,7 +25,7 @@
       />
     </div>
     <div class="mb-4">
-      <label for="password" class="block font-bold mb-2 text-gray-700"
+      <label for="password" class=" text-xl block font-bold mb-2 text-gray-700"
         >Repeat Password</label
       >
       <input
@@ -38,20 +38,26 @@
     </div>
     <button
       type="submit"
-      class="w-full p-2 rounded-lg bg-blue-500 hover:bg-blue-700 text-white font-bold"
+      class="mt-6 py-2 px-6 rounded-lg self-start text-md bg-emerald-300 hover:bg-emerald-500 text-white font-bold duration-200" 
     >
       Register
     </button>
+    <div class="errorMsg" v-if="errRegister"> Something went wrong while registering</div>
   </form>
 </template>
 
 <script setup>
 import { ref, watch } from "vue";
+import { supabase } from "../supabase";
+import { useUserStore } from "../store/user.js";
+import { useRouter } from "vue-router";
+
 const email = ref(null);
 const password = ref(null);
 const repeatPassword = ref(null);
 const errMsg = ref(null);
-const errPass = ref("Passwords don't match")
+const errPass = ref("Passwords don't match");
+const errRegister = ref(false);
 const showPass = ref(false);
 
 watch(email, (newEmail) => {
@@ -69,6 +75,23 @@ watch (repeatPassword, (newRepeatPassword) => {
         showPass.value = true;
     } else showPass.value = false;
 });
+
+// Register function
+const router = useRouter();
+const register = async () => {
+  try {
+    const { error } = await supabase.auth.signUp({
+      email: email.value,
+      password: password.value,
+    });
+    if (error) throw error;
+    router.push( {name: "Home"});
+  }
+  catch (error) {
+    errRegister.value = true;
+  }
+};
+
 
 </script>
 
