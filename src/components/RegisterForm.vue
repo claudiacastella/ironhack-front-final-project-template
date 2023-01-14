@@ -89,6 +89,9 @@ const register = async () => {
   }
   catch (error) {
     errRegister.value = true;
+    setTimeout(() => {
+      errRegister.value = false;
+    }, 5000);
   }
 };
 
