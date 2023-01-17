@@ -5,6 +5,10 @@
 </template>
 
 <script setup>
+import { ref, watch } from "vue";
+import { supabase } from "../supabase";
+import { useRouter } from "vue-router";
+import { useUserStore } from "../store/user";
 
 </script>
 

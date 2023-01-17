@@ -80,11 +80,7 @@ watch (repeatPassword, (newRepeatPassword) => {
 const router = useRouter();
 const register = async () => {
   try {
-    const { error } = await supabase.auth.signUp({
-      email: email.value,
-      password: password.value,
-    });
-    if (error) throw error;
+    useUserStore.signUp;
     router.push( {name: "Home"});
   }
   catch (error) {

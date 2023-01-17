@@ -1,6 +1,6 @@
 <template>
   <form
-    @submit.prevent="login"
+    @submit.prevent="signIn"
     class="bg-slate-200 p-8 max-w-md mx-auto rounded-lg shadow-lg m-8"
   >
     <h1 class="text-3xl font-bold mb-8">Login</h1>
@@ -29,7 +29,7 @@
     </div>
     <button
       type="submit"
-      class="mt-6 py-2 px-6 rounded-lg self-start text-md bg-emerald-300 hover:bg-emerald-500  text-white font-bold duration-200" @click="signup"
+      class="mt-6 py-2 px-6 rounded-lg self-start text-md bg-emerald-300 hover:bg-emerald-500  text-white font-bold duration-200"
     >
       Login
     </button>
@@ -63,19 +63,15 @@ watch(email, (newEmail) => {
   } else showError.value = false;
 });
 
-function login() {
-  user.username = email.value;
-  router.push("/");
-}
+// function login() {
+//   user.username = email.value;
+//   user.signIn()
+// }
 
-const signup = async () => {
+const signIn = async () => {
   try {
-    const { data, error } = await supabase.auth.signIn({
-      email: email.value,
-      password: password.value,
-    });
-    if (error) throw error;
-    router.push( {name: "Dashboard"});
+    useUserStore.signIn;
+    router.push({name: "Dashboard"});
   }
   catch (error) {
     errLogin.value = error.message;

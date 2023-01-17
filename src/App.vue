@@ -11,6 +11,7 @@ import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
 import { useUserStore } from "./store/user.js";
+import { supabase } from "./supabase";
 import Navbar from "./components/NavBar.vue";
 import Footer from "./components/Footer.vue";
 
@@ -26,10 +27,13 @@ onMounted(async () => {
       router.push({ path: "/auth" });
     } else {
       // continue to dashboard
-      router.push({ path: "/" });
+      router.push({ path: "/dashboard" });
     }
   } catch (e) {
     console.log(e);
   }
 });
 </script>
+
+<style scoped>
+</style>
